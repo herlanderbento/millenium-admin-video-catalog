@@ -1,6 +1,6 @@
-import { ClassValidatorFields } from '@core/shared/domain/validators/class-validator-fields';
-import { EntityValidationError } from '@core/shared/domain/validators/validation.error';
-import { FieldsErrors } from '@core/shared/domain/validators/validator-fields-interface';
+import { ClassValidatorFields } from '../../domain/validators/class-validator-fields';
+import { EntityValidationError } from '../../domain/validators/validation.error';
+import { FieldsErrors } from '../../domain/validators/validator-fields-interface';
 
 type Expected =
   | {
@@ -17,7 +17,7 @@ expect.extend({
         return isValid();
       } catch (e) {
         const error = e as EntityValidationError;
-        return assertContainsErrorsMessages(error.error, received);
+        return assertContainsErrorsMessages(error.error as any, received);
       }
     } else {
       const { validator, data } = expected;
