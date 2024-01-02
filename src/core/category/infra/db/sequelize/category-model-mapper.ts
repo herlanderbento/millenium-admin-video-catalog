@@ -1,3 +1,4 @@
+import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
 import { Category, CategoryId } from '../../../domain/category.entity';
 import { CategoryModel } from './category.model';
 
@@ -21,7 +22,10 @@ export class CategoryModelMapper {
       created_at: model.created_at,
     });
 
-    Category.validate(category);
+    category.validate();
+    if (category.notification.hasErrors()) {
+      throw new EntityValidationError(category.notification.toJSON());
+    }
     return category;
   }
 }
