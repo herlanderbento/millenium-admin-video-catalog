@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { CategoryModelMapper } from '../category-model-mapper';
 import { CategoryModel } from '../category.model';
 import {
@@ -12,7 +13,7 @@ describe('CategoryModelMapper Integration Tests', () => {
 
   it('should throws error when category is invalid', () => {
     expect.assertions(2);
-    //@ts-expect-error - This is an invalid category
+    //@ts-ignore
     const model = CategoryModel.build({
       category_id: '9366b7dc-2d71-4799-b91c-c64adb205104',
       name: 'a'.repeat(256),
@@ -22,9 +23,11 @@ describe('CategoryModelMapper Integration Tests', () => {
       fail('The category is valid, but it needs throws a LoadEntityError');
     } catch (e) {
       expect(e).toBeInstanceOf(EntityValidationError);
-      expect((e as EntityValidationError).error).toMatchObject([{
-        name: ['name must be shorter than or equal to 255 characters'],
-      }]);
+      expect((e as EntityValidationError).error).toMatchObject([
+        {
+          name: ['name must be shorter than or equal to 255 characters'],
+        },
+      ]);
     }
   });
 
@@ -45,7 +48,7 @@ describe('CategoryModelMapper Integration Tests', () => {
         description: 'some description',
         is_active: true,
         created_at,
-      }).toJSON()
+      }).toJSON(),
     );
   });
 });
