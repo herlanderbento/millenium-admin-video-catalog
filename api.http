@@ -1,0 +1,25 @@
+## valid uuid = 50cf148b-d8c9-48c9-94e3-91551f3ed62b
+## Create Category
+POST http://localhost:3001/categories
+Content-Type: application/json
+
+{
+  "name": "Movie"
+}
+
+###
+GET http://localhost:3001/categories
+
+###
+GET http://localhost:3001/categories/5a9a64ed-8c92-4189-9662-e787621c3aef
+
+###
+PATCH http://localhost:3001/categories/77c8c6ad-9215-4d6f-b791-ecea8d976358
+Content-Type: application/json
+{
+  "name": "Mission Impossible 2",
+  "description": "Some description"
+}
+
+###
+DELETE  http://localhost:3001/categories/62ea7e0b-d631-42fb-8209-f39911e2d4dd

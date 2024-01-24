@@ -21,7 +21,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 
   async bulkInsert(entities: Category[]): Promise<void> {
     const modelsProps = entities.map((entity) =>
-      CategoryModelMapper.toModel(entity).toJSON()
+      CategoryModelMapper.toModel(entity).toJSON(),
     );
     await this.categoryModel.bulkCreate(modelsProps);
   }
@@ -34,7 +34,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
       modelProps.toJSON(),
       {
         where: { category_id: entity.category_id.id },
-      }
+      },
     );
 
     if (affectedRows !== 1) {

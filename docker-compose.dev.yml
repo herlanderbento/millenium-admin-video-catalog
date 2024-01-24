@@ -8,11 +8,20 @@ services:
       - 3000:3000
     volumes: 
       - .:/home/node/app
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_DATABASE=micro_videos
+      - MYSQL_ROOT_PASSWORD=root
   
   db:
     image: mysql:8.0.30-debian
+    container_name: micro_videos_db
     environment:
+      - MYSQL_HOST=localhost
       - MYSQL_DATABASE=micro_videos
       - MYSQL_ROOT_PASSWORD=root
     volumes:
       - ./.docker/dbdata:/var/lib/mysql:delegated
+      - ./mysql-config:/etc/mysql/conf.d
