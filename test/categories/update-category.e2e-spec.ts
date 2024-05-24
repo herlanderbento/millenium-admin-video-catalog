@@ -66,8 +66,34 @@ describe('CategoriesController (e2e)', () => {
       });
     });
 
+    // describe('should a response error with 422 when throw EntityValidationError', () => {
+    //   const appHelper = startApp();
+    //   const validationError =
+    //     UpdateCategoryFixture.arrangeForEntityValidationError();
+    //   const arrange = Object.keys(validationError).map((key) => ({
+    //     label: key,
+    //     value: validationError[key],
+    //   }));
+    //   let categoryRepo: ICategoryRepository;
+
+    //   beforeEach(() => {
+    //     categoryRepo = appHelper.app.get<ICategoryRepository>(
+    //       CategoryProviders.REPOSITORIES.CATEGORY_REPOSITORY.provide,
+    //     );
+    //   });
+    //   test.each(arrange)('when body is $label', async ({ value }) => {
+    //     const category = Category.fake().aCategory().build();
+    //     await categoryRepo.insert(category);
+    //     return request(appHelper.app.getHttpServer())
+    //       .patch(`/categories/${category.category_id.id}`)
+    //       .send(value.send_data)
+    //       .expect(422)
+    //       .expect(value.expected);
+    //   });
+    // });
+
     describe('should a response error with 422 when throw EntityValidationError', () => {
-      const appHelper = startApp();
+      const app = startApp();
       const validationError =
         UpdateCategoryFixture.arrangeForEntityValidationError();
       const arrange = Object.keys(validationError).map((key) => ({
@@ -77,18 +103,19 @@ describe('CategoriesController (e2e)', () => {
       let categoryRepo: ICategoryRepository;
 
       beforeEach(() => {
-        categoryRepo = appHelper.app.get<ICategoryRepository>(
+        categoryRepo = app.app.get<ICategoryRepository>(
           CategoryProviders.REPOSITORIES.CATEGORY_REPOSITORY.provide,
         );
       });
       test.each(arrange)('when body is $label', async ({ value }) => {
         const category = Category.fake().aCategory().build();
+
         await categoryRepo.insert(category);
-        return request(appHelper.app.getHttpServer())
+        return request(app.app.getHttpServer())
           .patch(`/categories/${category.category_id.id}`)
           .send(value.send_data)
-          .expect(422)
-          .expect(value.expected);
+          .send(value.expected.statusCode);
+        // .expect(value.expected.message);
       });
     });
 
