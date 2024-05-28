@@ -18,10 +18,12 @@ export class CreateCastMemberUseCase
     const [type, errorCastMemberType] = CastMemberType.create(
       input.type,
     ).asArray();
+
     const entity = CastMember.create({
       ...input,
       type,
     });
+
     const notification = entity.notification;
     if (errorCastMemberType) {
       notification.setError(errorCastMemberType.message, 'type');
