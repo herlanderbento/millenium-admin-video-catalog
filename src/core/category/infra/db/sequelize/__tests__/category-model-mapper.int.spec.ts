@@ -1,11 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { CategoryModelMapper } from '../category-model-mapper';
 import { CategoryModel } from '../category.model';
-import {
-  EntityValidationError,
-  LoadEntityError,
-} from '../../../../../shared/domain/validators/validation.error';
-import { Category, CategoryId } from '../../../../domain/category.entity';
+import { EntityValidationError } from '../../../../../shared/domain/validators/validation.error';
+import { Category, CategoryId } from '../../../../domain/category.aggregate';
 import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
 
 describe('CategoryModelMapper Integration Tests', () => {

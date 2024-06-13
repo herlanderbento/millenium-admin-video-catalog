@@ -1,6 +1,6 @@
 import { SortDirection } from '../../../../shared/domain/repository/search-params';
 import { InMemorySearchableRepository } from '../../../../shared/infra/db/in-memory/in-memory.repository';
-import { Category, CategoryId } from '../../../domain/category.entity';
+import { Category, CategoryId } from '../../../domain/category.aggregate';
 import {
   CategoryFilter,
   ICategoryRepository,

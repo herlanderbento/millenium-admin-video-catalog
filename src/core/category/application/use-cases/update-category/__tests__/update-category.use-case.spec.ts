@@ -1,6 +1,6 @@
 import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
 import { InvalidUuidError } from '../../../../../shared/domain/value-object/uuid.vo';
-import { Category, CategoryId } from '../../../../domain/category.entity';
+import { Category, CategoryId } from '../../../../domain/category.aggregate';
 import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category-in-memory.repository';
 import { UpdateCategoryUseCase } from '../update-category.use-case';
 
@@ -15,13 +15,13 @@ describe('UpdateCategoryUseCase Unit Tests', () => {
 
   it('should throws error when entity not found', async () => {
     await expect(() =>
-      useCase.execute({ id: 'fake id', name: 'fake' })
+      useCase.execute({ id: 'fake id', name: 'fake' }),
     ).rejects.toThrow(new InvalidUuidError());
 
     const categoryId = new CategoryId();
 
     await expect(() =>
-      useCase.execute({ id: categoryId.id, name: 'fake' })
+      useCase.execute({ id: categoryId.id, name: 'fake' }),
     ).rejects.toThrow(new NotFoundError(categoryId.id, Category));
   });
 

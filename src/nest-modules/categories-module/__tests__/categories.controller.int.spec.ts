@@ -14,7 +14,7 @@ import { CategoryOutputMapper } from '../../../core/category/application/use-cas
 import {
   Category,
   CategoryId,
-} from '../../../core/category/domain/category.entity';
+} from '../../../core/category/domain/category.aggregate';
 import {
   CategoryCollectionPresenter,
   CategoryPresenter,

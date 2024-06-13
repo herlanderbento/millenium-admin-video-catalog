@@ -1,5 +1,5 @@
 import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
-import { Category, CategoryId } from '../../../domain/category.entity';
+import { Category, CategoryId } from '../../../domain/category.aggregate';
 import { CategoryModel } from './category.model';
 
 export class CategoryModelMapper {

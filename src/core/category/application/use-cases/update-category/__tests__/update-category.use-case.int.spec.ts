@@ -1,6 +1,6 @@
 import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
 import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
-import { Category, CategoryId } from '../../../../domain/category.entity';
+import { Category, CategoryId } from '../../../../domain/category.aggregate';
 import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category-sequelize.repository';
 import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
 import { UpdateCategoryUseCase } from '../update-category.use-case';
@@ -19,7 +19,7 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
   it('should throws error when entity not found', async () => {
     const categoryId = new CategoryId();
     await expect(() =>
-      useCase.execute({ id: categoryId.id, name: 'fake' })
+      useCase.execute({ id: categoryId.id, name: 'fake' }),
     ).rejects.toThrow(new NotFoundError(categoryId.id, Category));
   });
 
@@ -148,7 +148,7 @@ describe('UpdateCategoryUseCase Integration Tests', () => {
         ...('is_active' in i.input && { is_active: i.input.is_active }),
       });
       const entityUpdated = await repository.findById(
-        new CategoryId(i.input.id)
+        new CategoryId(i.input.id),
       );
       expect(output).toStrictEqual({
         id: entity.category_id.id,
