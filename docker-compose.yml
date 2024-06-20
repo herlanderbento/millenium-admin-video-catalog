@@ -6,7 +6,7 @@ services:
     command: ./.docker/start.sh
     container_name: micro-videos-app
     ports: 
-      - 3000:3000
+      - 3001:3000
     volumes: 
       - .:/home/node/app
     depends_on:
@@ -24,7 +24,7 @@ services:
       - MYSQL_DATABASE=micro_videos
       - MYSQL_ROOT_PASSWORD=root
     ports:
-      - 33006:3306
+      - 3306:3306
     volumes:
        - ./mysql-config:/etc/mysql/conf.d
     tmpfs:
