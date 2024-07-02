@@ -20,6 +20,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
         `binary ${this.genreModel.name}.name ${sort_dir}`,
     },
   };
+
   constructor(
     private genreModel: typeof GenreModel,
     private uow: UnitOfWorkSequelize,
@@ -84,6 +85,7 @@ export class GenreSequelizeRepository implements IGenreRepository {
       },
       transaction: this.uow.getTransaction(),
     });
+
     const existsGenreIds = existsGenreModels.map(
       (m) => new GenreId(m.genre_id),
     );

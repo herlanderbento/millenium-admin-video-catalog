@@ -70,7 +70,7 @@ export class Genre extends AggregateRoot {
     );
   }
 
-  activete() {
+  activate() {
     this.is_active = true;
   }
 
