@@ -36,7 +36,7 @@ npm install
 - Run tests
 
 ```sh
-npm run test:e2e -- --runInBand --detectOpenHandles --forceExit
+npm run test:e2e
 ```
 ```sh
 npm run test

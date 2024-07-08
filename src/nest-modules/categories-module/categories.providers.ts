@@ -79,4 +79,5 @@ export const VALIDATIONS = {
 export const CATEGORY_PROVIDERS = {
   REPOSITORIES,
   USE_CASES,
+  VALIDATIONS,
 };
