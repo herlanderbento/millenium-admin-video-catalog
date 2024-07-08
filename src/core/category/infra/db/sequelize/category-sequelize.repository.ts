@@ -30,6 +30,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     const modelsProps = entities.map((entity) =>
       CategoryModelMapper.toModel(entity).toJSON(),
     );
+
     await this.categoryModel.bulkCreate(modelsProps);
   }
 

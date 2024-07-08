@@ -9,7 +9,7 @@ POST http://{{host}}/categories
 Content-Type: {{contentType}}
 
 {
-  "name": "Drama",
+  "name": "Drama 2",
   "description": "some description"
 }
 

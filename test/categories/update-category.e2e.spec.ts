@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { instanceToPlain } from 'class-transformer';
 import { CategoryOutputMapper } from '../../src/core/category/application/use-cases/common/category-output';
-import { Category } from '../../src/core/category/domain/category.entity';
+import { Category } from '../../src/core/category/domain/category.aggregate';
 import { ICategoryRepository } from '../../src/core/category/domain/category.repository';
 import { Uuid } from '../../src/core/shared/domain/value-object/uuid.vo';
 import { CategoriesController } from '../../src/nest-modules/categories-module/categories.controller';

@@ -33,6 +33,15 @@ docker-compose up -d
 npm install
 ```
 
+- Run tests
+
+```sh
+npm run test:e2e -- --runInBand --detectOpenHandles --forceExit
+```
+```sh
+npm run test
+```
+
 <br/>
 <Br/>
 

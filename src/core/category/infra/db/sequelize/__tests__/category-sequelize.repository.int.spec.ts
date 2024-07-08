@@ -25,6 +25,30 @@ describe('CategorySequelizeRepository Integration Tests', () => {
     expect(categoryCreated!.toJSON()).toStrictEqual(category.toJSON());
   });
 
+  test('should insert many categories', async () => {
+    const categories = [
+      Category.fake().aCategory().build(),
+      Category.fake().aCategory().build(),
+      Category.fake().aCategory().build(),
+      Category.fake().aCategory().build(),
+      Category.fake().aCategory().build(),
+    ];
+
+    await repository.bulkInsert(categories);
+
+    const categoriesCreated = await repository.findByIds(
+      categories.map((category) => category.category_id),
+    );
+
+    expect(
+      categoriesCreated.map((category) => category.toJSON()),
+    ).toStrictEqual(
+      categories
+        .map((category) => category.toJSON())
+        .sort((a, b) => a.category_id.localeCompare(b.category_id)),
+    );
+  });
+
   it('should finds a entity by id', async () => {
     let entityFound = await repository.findById(new CategoryId());
     expect(entityFound).toBeNull();
