@@ -39,6 +39,7 @@ export class Category extends AggregateRoot {
   get entity_id(): ValueObject {
     return this.category_id;
   }
+  
   static create(props: CategoryCreateCommand): Category {
     const category = new Category(props);
     //category.validate();
