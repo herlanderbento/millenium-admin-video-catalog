@@ -1,6 +1,6 @@
 import { AggregateRoot } from '../../shared/domain/aggregate-root';
 import { ValueObject } from '../../shared/domain/value-object';
-import { Uuid } from '../../shared/domain/value-object/uuid.vo';
+import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
 import { CategoryFakeBuilder } from './category-fake.builder';
 import { CategoryValidatorFactory } from './category.validator';
 
@@ -39,7 +39,7 @@ export class Category extends AggregateRoot {
   get entity_id(): ValueObject {
     return this.category_id;
   }
-  
+
   static create(props: CategoryCreateCommand): Category {
     const category = new Category(props);
     //category.validate();

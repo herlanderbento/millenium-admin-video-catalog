@@ -1,6 +1,6 @@
 import { CategoryId } from '../../category/domain/category.aggregate';
 import { AggregateRoot } from '../../shared/domain/aggregate-root';
-import { Uuid } from '../../shared/domain/value-object/uuid.vo';
+import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
 import { GenreFakeBuilder } from './genre-fake.builder';
 import GenreValidatorFactory from './genre.validator';
 

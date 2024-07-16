@@ -24,7 +24,7 @@ import { Category } from '../../../core/category/domain/category.aggregate';
 import { GENRES_PROVIDERS } from '../genres.providers';
 import { CATEGORY_PROVIDERS } from '../../categories-module/categories.providers';
 import { GenreOutputMapper } from '../../../core/genre/application/use-cases/common/genre-output';
-import { Uuid } from '../../../core/shared/domain/value-object/uuid.vo';
+import { Uuid } from '../../../core/shared/domain/value-objects/uuid.vo';
 
 describe('GenresController Integration Tests', () => {
   let controller: GenresController;

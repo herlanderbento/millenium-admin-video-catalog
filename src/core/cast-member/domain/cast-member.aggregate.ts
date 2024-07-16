@@ -1,5 +1,5 @@
 import { AggregateRoot } from '../../shared/domain/aggregate-root';
-import { Uuid } from '../../shared/domain/value-object/uuid.vo';
+import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
 import { CastMemberFakeBuilder } from './cast-member-fake.builder';
 import { CastMemberType } from './cast-member-type.vo';
 import CastMemberValidatorFactory from './cast-member.validator';

@@ -19,7 +19,7 @@ import { DatabaseModule } from '../../database-module/database.module';
 import { ConfigModule } from '../../config-module/config.module';
 import { CastMemberOutputMapper } from '../../../core/cast-member/application/use-cases/common/cast-member-output';
 import { ListCastMembersUseCase } from '../../../core/cast-member/application/use-cases/list-cast-member/list-cast-members.use-case';
-import { Uuid } from '../../../core/shared/domain/value-object/uuid.vo';
+import { Uuid } from '../../../core/shared/domain/value-objects/uuid.vo';
 
 describe('CastMembersController Integration Tests', () => {
   let controller: CastMembersController;
