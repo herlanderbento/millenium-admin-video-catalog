@@ -17,13 +17,27 @@ export class Config {
   static bucketName() {
     Config.readEnv();
 
-    return Config.env.GOOGLE_CLOUD_STORAGE_BUCKET_NAME;
+    // return Config.env.GOOGLE_CLOUD_STORAGE_BUCKET_NAME;
+    return Config.env.CLOUDFLARE_AWS_BUCKET_NAME;
   }
 
   static googleCredentials() {
     Config.readEnv();
 
     return JSON.parse(Config.env.GOOGLE_CLOUD_CREDENTIALS);
+  }
+
+  static cloudFlareCredentials() {
+    Config.readEnv();
+
+    return {
+      endpoint: `https://${Config.env.CLOUDFLARE_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+      region: 'auto',
+      credentials: {
+        accessKeyId: Config.env.CLOUDFLARE_AWS_ACCESS_KEY_ID,
+        secretAccessKey: Config.env.CLOUDFLARE_AWS_SECRET_ACCESS_KEY,
+      },
+    };
   }
 
   static rabbitmqUri() {
