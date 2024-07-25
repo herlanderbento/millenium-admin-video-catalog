@@ -6,6 +6,26 @@ import {
 import { join } from 'path';
 import Joi from 'joi';
 
+//@ts-expect-error - the type is correct
+const joiJson = Joi.extend((joi) => {
+  return {
+    type: 'object',
+    base: joi.object(),
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    coerce(value, _schema) {
+      if (value[0] !== '{' && !/^\s*\{/.test(value)) {
+        return;
+      }
+
+      try {
+        return { value: JSON.parse(value) };
+      } catch (err) {
+        console.error(err);
+      }
+    },
+  };
+});
+
 type DB_SCHEMA_TYPE = {
   DB_VENDOR: 'mysql' | 'sqlite';
   DB_HOST: string;
@@ -42,6 +62,32 @@ export const CONFIG_DB_SCHEMA: Joi.StrictSchemaMap<DB_SCHEMA_TYPE> = {
 
 export type CONFIG_SCHEMA_TYPE = DB_SCHEMA_TYPE;
 
+type CONFIG_GOOGLE_SCHEMA_TYPE = {
+  GOOGLE_CLOUD_CREDENTIALS: object;
+  GOOGLE_CLOUD_STORAGE_BUCKET_NAME: string;
+};
+
+export const CONFIG_GOOGLE_SCHEMA: Joi.StrictSchemaMap<CONFIG_GOOGLE_SCHEMA_TYPE> =
+  {
+    GOOGLE_CLOUD_CREDENTIALS: joiJson.object().required(),
+    GOOGLE_CLOUD_STORAGE_BUCKET_NAME: Joi.string().required(),
+  };
+
+type CONFIG_CLOUDFLARE_SCHEMA_TYPE = {
+  CLOUDFLARE_ACCOUNT_ID: string;
+  CLOUDFLARE_AWS_ACCESS_KEY_ID: string;
+  CLOUDFLARE_AWS_SECRET_ACCESS_KEY: string;
+  CLOUDFLARE_AWS_BUCKET_NAME: string;
+};
+
+export const CONFIG_CLOUDFLARE_SCHEMA: Joi.StrictSchemaMap<CONFIG_CLOUDFLARE_SCHEMA_TYPE> =
+  {
+    CLOUDFLARE_ACCOUNT_ID: Joi.string().required(),
+    CLOUDFLARE_AWS_ACCESS_KEY_ID: Joi.string().required(),
+    CLOUDFLARE_AWS_SECRET_ACCESS_KEY: Joi.string().required(),
+    CLOUDFLARE_AWS_BUCKET_NAME: Joi.string().required(),
+  };
+
 @Module({})
 export class ConfigModule extends NestConfigModule {
   static forRoot(options: ConfigModuleOptions = {}) {
@@ -56,6 +102,7 @@ export class ConfigModule extends NestConfigModule {
       ],
       validationSchema: Joi.object({
         ...CONFIG_DB_SCHEMA,
+        ...CONFIG_CLOUDFLARE_SCHEMA,
       }),
       ...otherOptions,
     });
