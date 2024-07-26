@@ -14,9 +14,9 @@ import { IUnitOfWork } from '../../core/shared/domain/repository/unit-of-work.in
       provide: 'IStorage',
       useFactory: (configService: ConfigService) => {
         const accountID = configService.get('CLOUDFLARE_ACCOUNT_ID');
-        const accessKeyId = configService.get('CLOUDFLARE_ACCESS_KEY_ID');
+        const accessKeyId = configService.get('CLOUDFLARE_AWS_ACCESS_KEY_ID');
         const secretAccessKey = configService.get(
-          'CLOUDFLARE_SECRET_ACCESS_KEY',
+          'CLOUDFLARE_AWS_SECRET_ACCESS_KEY',
         );
         const bucket = configService.get('CLOUDFLARE_AWS_BUCKET_NAME');
         const storage = new S3Client({

@@ -1,5 +1,5 @@
 @hostname = localhost
-@port = 3000
+@port = 3002
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 ## valid uuid = 50cf148b-d8c9-48c9-94e3-91551f3ed62b
@@ -44,8 +44,7 @@ Content-Type: {{contentType}}
 {
   "name": "Genre 1",
   "categories_id": [
-    "{{categoryId}}",
-    "a65f6fb2-195b-4e1a-8e67-8b4f2d8a02f8"
+    "{{categoryId}}"
   ]
 }
 
@@ -55,7 +54,7 @@ Content-Type: {{contentType}}
 
 ### Create CastMember
 # @name createCastMember
-POST http://localhost:3000/cast-members
+POST http://{{host}}/cast-members
 Content-Type: application/json
 
 {
@@ -91,7 +90,52 @@ Content-Type: application/json
 }
 
 ###
+
 @videoId = {{createVideo.response.body.data.id}}
 
-### Get a video
+###
 GET http://{{host}}/videos/{{videoId}}
+
+###
+# @name updateVideo
+PATCH  http://{{host}}/videos/{{videoId}}
+Content-Type: application/json
+
+{
+    "title": "Video 4",
+    "description": "Description 4",
+    "year_launched": 2024,
+    "is_opened": false,
+    "rating": "L",
+    "duration": 120,
+    "categories_id": [
+        "{{categoryId}}"
+    ],
+    "genres_id": [
+        "{{genreId}}"
+    ],
+    "cast_members_id": [
+        "{{castMemberId}}"
+    ]
+}
+
+
+###
+@videoId = {{createVideo.response.body.data.id}}
+
+###
+# @name uploadVideo
+PATCH http://{{host}}/videos/{{videoId}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary1234
+
+# ------WebKitFormBoundary1234
+# Content-Disposition: form-data; name="video"; filename="video.mp4"
+# Content-Type: video/mp4
+
+# < ./package.json
+------WebKitFormBoundary1234
+Content-Disposition: form-data; name="title"
+Content-Type: text/plain
+
+< ./test.txt
+------WebKitFormBoundary1234--
