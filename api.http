@@ -3,22 +3,24 @@
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 ## valid uuid = 50cf148b-d8c9-48c9-94e3-91551f3ed62b
-
-### Create Category
-POST http://{{host}}/categories
-Content-Type: {{contentType}}
+### 
+# @name createCategory
+POST  http://{{host}}/categories
+Content-Type: application/json
 
 {
-  "name": "Drama 2",
-  "description": "some description"
+    "name": "Category 2",
+    "description": "Description 1"
 }
+###
 
+@categoryId = {{createCategory.response.body.data.id}}
 ###  List categories
 GET http://{{host}}/categories
 Content-Type: {{contentType}}
 
 ### Get category
-GET  http://{{host}}/categories/5a9a64ed-8c92-4189-9662-e787621c3aef
+GET  http://{{host}}/categories/{{categoryId}}
 Content-Type: {{contentType}}
 
 ### Update category
@@ -32,3 +34,64 @@ Content-Type: {{contentType}}
 
 ### Delete category
 DELETE  http://{{host}}/categories/8180d203-77eb-47f9-a3b6-2d9375cc6ed2
+
+
+### Create genre
+# @name createGenre
+POST http://{{host}}/genres
+Content-Type: {{contentType}}
+
+{
+  "name": "Genre 1",
+  "categories_id": [
+    "{{categoryId}}",
+    "a65f6fb2-195b-4e1a-8e67-8b4f2d8a02f8"
+  ]
+}
+
+###
+@genreId = {{createGenre.response.body.data.id}}
+
+
+### Create CastMember
+# @name createCastMember
+POST http://localhost:3000/cast-members
+Content-Type: application/json
+
+{
+    "name": "Cast Member 1",
+    "type": 1
+}
+
+###
+
+@castMemberId = {{createCastMember.response.body.data.id}}
+
+###
+# @name createVideo
+POST http://{{host}}/videos
+Content-Type: application/json
+
+{
+    "title": "Video 2",
+    "description": "Description 1",
+    "year_launched": 2020,
+    "is_opened": false,
+    "rating": "L",
+    "duration": 90,
+    "categories_id": [
+        "{{categoryId}}"
+    ],
+    "genres_id": [
+        "{{genreId}}"
+    ],
+    "cast_members_id": [
+        "{{castMemberId}}"
+    ]
+}
+
+###
+@videoId = {{createVideo.response.body.data.id}}
+
+### Get a video
+GET http://{{host}}/videos/{{videoId}}
