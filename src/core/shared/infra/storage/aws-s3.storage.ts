@@ -25,8 +25,6 @@ export class AwsS3Storage implements IStorage {
       Body: object.data,
     });
 
-    console.log('command', command);
-
     await this.storageSdk.send(command);
   }
 

@@ -36,8 +36,8 @@ export class VideoAudioMediaReplaced implements IDomainEvent {
 export class VideoAudioMediaUploadedIntegrationEvent
   implements IIntegrationEvent
 {
-  //resource_id: string;
-  //file_path: string;
+  resource_id: string;
+  file_path: string;
 
   declare event_name: string;
   declare payload: any;
@@ -47,12 +47,12 @@ export class VideoAudioMediaUploadedIntegrationEvent
   constructor(event: VideoAudioMediaReplaced) {
     this['resource_id'] = `${event.aggregate_id.id}.${event.media_type}`;
     this['file_path'] = event.media.raw_url;
-    // this.event_version = event.event_version;
-    // this.occurred_on = event.occurred_on;
-    // this.payload = {
-    //   video_id: event.aggregate_id.id,
-    //   media: event.media.toJSON(),
-    // };
-    // this.event_name = this.constructor.name;
+    this.event_version = event.event_version;
+    this.occurred_on = event.occurred_on;
+    this.payload = {
+      video_id: event.aggregate_id.id,
+      media: event.media.toJSON(),
+    };
+    this.event_name = this.constructor.name;
   }
 }

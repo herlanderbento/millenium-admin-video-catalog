@@ -21,6 +21,7 @@ import { UploadAudioVideoMediasUseCase } from '../../core/video/application/use-
 import { GetVideoUseCase } from '../../core/video/application/use-cases/get-video/get-video.use-case';
 import { ProcessAudioVideoMediasUseCase } from '../../core/video/application/use-cases/process-audio-video-medias/process-audio-video-medias.use-case';
 import { CastMembersIdExistsInDatabaseValidator } from '../../core/cast-member/application/validations  /cast-members-ids-exists-in-database.validator';
+import { PublishVideoMediaReplacedInQueueHandler } from '../../core/video/application/handlers/publish-video-media-replaced-in-queue.handler';
 
 export const REPOSITORIES = {
   VIDEO_REPOSITORY: {
@@ -143,7 +144,15 @@ export const USE_CASES = {
   },
 };
 
+export const HANDLERS = {
+  PUBLISH_VIDEO_MEDIA_REPLACED_IN_QUEUE_HANDLER: {
+    provide: PublishVideoMediaReplacedInQueueHandler,
+    useClass: PublishVideoMediaReplacedInQueueHandler,
+  },
+};
+
 export const VIDEOS_PROVIDERS = {
   REPOSITORIES,
   USE_CASES,
+  HANDLERS,
 };
