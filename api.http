@@ -1,5 +1,5 @@
 @hostname = localhost
-@port = 3000
+@port = 3005
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 ## valid uuid = 50cf148b-d8c9-48c9-94e3-91551f3ed62b

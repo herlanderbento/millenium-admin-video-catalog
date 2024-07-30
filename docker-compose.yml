@@ -1,13 +1,13 @@
 version: '3'
 
-services: 
-  app: 
+services:
+  app:
     build: .
     command: ./.docker/start.sh
     container_name: micro-videos-app
-    ports: 
+    ports:
       - 3001:3000
-    volumes: 
+    volumes:
       - .:/home/node/app
     depends_on:
       - db
@@ -15,7 +15,7 @@ services:
       - MYSQL_HOST=localhost
       - MYSQL_DATABASE=micro_videos
       - MYSQL_ROOT_PASSWORD=root
-  
+
   db:
     image: mysql:8.0.30-debian
     container_name: micro-videos-db
@@ -26,6 +26,16 @@ services:
     ports:
       - 3306:3306
     volumes:
-       - ./mysql-config:/etc/mysql/conf.d
+      - ./mysql-config:/etc/mysql/conf.d
     tmpfs:
       - /var/lib/mysql
+
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
