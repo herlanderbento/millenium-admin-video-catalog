@@ -139,3 +139,7 @@ Content-Type: text/plain
 
 < ./test.txt
 ------WebKitFormBoundary1234--
+
+
+###
+GET http://{{host}}/rabbitmq-fake

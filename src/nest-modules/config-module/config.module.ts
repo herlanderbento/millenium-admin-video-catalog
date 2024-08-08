@@ -88,6 +88,17 @@ export const CONFIG_CLOUDFLARE_SCHEMA: Joi.StrictSchemaMap<CONFIG_CLOUDFLARE_SCH
     CLOUDFLARE_AWS_BUCKET_NAME: Joi.string().required(),
   };
 
+type CONFIG_RABBITMQ_SCHEMA_TYPE = {
+  RABBITMQ_URI: string;
+  RABBITMQ_REGISTER_HANDLERS: boolean;
+};
+
+export const CONFIG_RABBITMQ_SCHEMA: Joi.StrictSchemaMap<CONFIG_RABBITMQ_SCHEMA_TYPE> =
+  {
+    RABBITMQ_URI: Joi.string().required(),
+    RABBITMQ_REGISTER_HANDLERS: Joi.boolean().required(),
+  };
+
 @Module({})
 export class ConfigModule extends NestConfigModule {
   static forRoot(options: ConfigModuleOptions = {}) {
@@ -103,6 +114,7 @@ export class ConfigModule extends NestConfigModule {
       validationSchema: Joi.object({
         ...CONFIG_DB_SCHEMA,
         ...CONFIG_CLOUDFLARE_SCHEMA,
+        ...CONFIG_RABBITMQ_SCHEMA,
       }),
       ...otherOptions,
     });

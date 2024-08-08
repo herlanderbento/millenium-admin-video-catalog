@@ -13,6 +13,7 @@ import { CategoriesModule } from '../categories-module/categories.module';
 import { GenresModule } from '../genres-module/genres.module';
 import { VideosController } from './videos.controller';
 import { VIDEOS_PROVIDERS } from './videos.providers';
+import { RabbitmqModule } from '../rabbitmq-module/rabbitmq.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { VIDEOS_PROVIDERS } from './videos.providers';
       ImageMediaModel,
       AudioVideoMediaModel,
     ]),
+    RabbitmqModule.forFeature(),
     CategoriesModule,
     GenresModule,
     CastMembersModule,
