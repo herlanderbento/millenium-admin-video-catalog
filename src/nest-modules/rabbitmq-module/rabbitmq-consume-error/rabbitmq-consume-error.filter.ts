@@ -1,0 +1,78 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  UnprocessableEntityException,
+} from '@nestjs/common';
+import { NotFoundError } from 'rxjs';
+import { EntityValidationError } from '../../../core/shared/domain/validators/validation.error';
+import console from 'console';
+import { AmqpConnection, Nack } from '@golevelup/nestjs-rabbitmq';
+import { ConsumeMessage, MessagePropertyHeaders } from 'amqplib';
+
+@Catch()
+export class RabbitmqConsumeErrorFilter<T> implements ExceptionFilter {
+  static readonly RETRY_COUNT_HEADER = 'x-retry-count';
+  static readonly MAX_RETRIES = 3;
+
+  static readonly NON_RETRIABLE_ERRORS = [
+    NotFoundError,
+    EntityValidationError,
+    UnprocessableEntityException,
+  ];
+
+  constructor(private amqpConnection: AmqpConnection) {}
+
+  async catch(exception: T, host: ArgumentsHost) {
+    if (host.getType<'rmq'>() !== 'rmq') {
+      return;
+    }
+
+    const hasRetriableError =
+      RabbitmqConsumeErrorFilter.NON_RETRIABLE_ERRORS.some(
+        (error) => exception instanceof error,
+      );
+
+    if (hasRetriableError) {
+      return new Nack(false);
+    }
+
+    const ctx = host.switchToRpc();
+    const message = ctx.getContext();
+
+    if (this.shouldRetry(message.properties.headers)) {
+      await this.retry(message);
+    } else {
+      return new Nack(false);
+    }
+  }
+
+  private shouldRetry(messageHeaders: MessagePropertyHeaders): boolean {
+    const retryHeader = RabbitmqConsumeErrorFilter.RETRY_COUNT_HEADER;
+    const maxRetries = RabbitmqConsumeErrorFilter.MAX_RETRIES;
+    return (
+      !(retryHeader in messageHeaders) ||
+      messageHeaders[retryHeader] < maxRetries
+    );
+  }
+
+  private async retry(message: ConsumeMessage) {
+    const messageHeaders: MessagePropertyHeaders | any =
+      message.properties.headers;
+    const retryHeader = RabbitmqConsumeErrorFilter.RETRY_COUNT_HEADER;
+    messageHeaders[retryHeader] = messageHeaders[retryHeader]
+      ? messageHeaders[retryHeader] + 1
+      : 1;
+    messageHeaders['x-delay'] = 5000; //5s
+    return this.amqpConnection.publish(
+      'direct.delayed',
+      message.fields.routingKey,
+      message.content,
+      {
+        correlationId: message.properties.correlationId,
+        headers: messageHeaders,
+      },
+    );
+  }
+}
