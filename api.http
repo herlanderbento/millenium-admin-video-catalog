@@ -7,6 +7,7 @@
 # @name createCategory
 POST  http://{{host}}/categories
 Content-Type: application/json
+Authorization: Bearer {{jwtToken}}
 
 {
     "name": "Category 2",
@@ -153,3 +154,28 @@ username=admin@user.com
 &password=secret
 &grant_type=password
 &client_id=codeflix-admin-frontend
+
+
+### configuração do openid connect server
+GET http://localhost:8080/realms/codeflix/.well-known/openid-configuration
+
+### certificados
+GET http://localhost:8080/realms/codeflix/protocol/openid-connect/certs
+
+###
+POST http://{{host}}/auth
+Content-Type: application/json
+
+{
+    "email": "admin",
+    "password": "secret"
+}
+
+###
+@jwtToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tY2F0YWxvZyJdfSwiaWF0IjoxNzIzNTU5NzM5LCJleHAiOjE3MjM2NDYxMzl9.lusId5-15wkNB98uRakUr38thnhq_T2kuQG7TxSr0sxeKjCiypNgGR4zYE2BolRVJVMPGWrZfge54Hg_sMCBb6qUY3Y3mZlnb1p_9X-5efrijBVmEGoVqY3fNeWgREEL8I5QYa9R60Wmn58hOaaS6cb4Sti7LeyeeWjpASU9RYyFyzxINhCQsrpoMIDBnA-JhJ6ALhNiDJHlRJXRha2k93sBhneY-DAYnZZUMC19qzl-_FlJVm6ou2XrP8KAd9-6cJcWDBunQIPdIiKoWBHU8wiHPYD5koNMrVPi2zqhINcN9d18Zv40l6KIHK4uxLxp2mE9USMbJ-MGjNK2tpNF-w
+
+
+###
+GET http://{{host}}/auth
+Content-Type: application/json
+Authorization: Bearer {{jwtToken}}

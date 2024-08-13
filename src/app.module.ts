@@ -11,6 +11,7 @@ import { UseCaseModule } from './nest-modules/use-case-module/use-case.module';
 import { RabbitMQFakeConsumer } from './rabbitmq-fake.consumer';
 import { RabbitmqFakeController } from './rabbitmq-fake/rabbitmq-fake.controller';
 import { RabbitmqModule } from './nest-modules/rabbitmq-module/rabbitmq.module';
+import { AuthModule } from './nest-modules/auth-module/auth.module';
 
 @Module({
   imports: [
@@ -19,15 +20,12 @@ import { RabbitmqModule } from './nest-modules/rabbitmq-module/rabbitmq.module';
     EventModule,
     UseCaseModule,
     DatabaseModule,
+    RabbitmqModule.forRoot(),
+    AuthModule,
     CategoriesModule,
     CastMembersModule,
     GenresModule,
     VideosModule,
-    // RabbitMQModule.forRoot(RabbitMQModule, {
-    //   uri: 'amqp://admin:admin@localhost:5672',
-    //   connectionInitOptions: { wait: false, timeout: 10000 },
-    // }),
-    RabbitmqModule.forRoot(),
   ],
   controllers: [RabbitmqFakeController],
   providers: [RabbitMQFakeConsumer],
