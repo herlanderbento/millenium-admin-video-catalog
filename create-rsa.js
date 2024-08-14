@@ -1,6 +1,6 @@
-const crypto = require('crypto');
+import { generateKeyPairSync } from 'crypto';
 
-const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
+const { privateKey, publicKey } = generateKeyPairSync('rsa', {
   modulusLength: 2048,
   publicKeyEncoding: {
     type: 'spki',

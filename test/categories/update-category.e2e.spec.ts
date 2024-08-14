@@ -43,6 +43,7 @@ describe('CategoriesController (e2e)', () => {
         async ({ id, send_data, expected }) => {
           return request(nestApp.app.getHttpServer())
             .patch(`/categories/${id}`)
+            .authenticate(nestApp.app)
             .send(send_data)
             .expect(expected.statusCode)
             .expect(expected);
@@ -60,37 +61,12 @@ describe('CategoriesController (e2e)', () => {
       test.each(arrange)('when body is $label', ({ value }) => {
         return request(app.app.getHttpServer())
           .patch(`/categories/${uuid}`)
+          .authenticate(app.app)
           .send(value.send_data)
           .expect(422)
           .expect(value.expected);
       });
     });
-
-    // describe('should a response error with 422 when throw EntityValidationError', () => {
-    //   const appHelper = startApp();
-    //   const validationError =
-    //     UpdateCategoryFixture.arrangeForEntityValidationError();
-    //   const arrange = Object.keys(validationError).map((key) => ({
-    //     label: key,
-    //     value: validationError[key],
-    //   }));
-    //   let categoryRepo: ICategoryRepository;
-
-    //   beforeEach(() => {
-    //     categoryRepo = appHelper.app.get<ICategoryRepository>(
-    //       CategoryProviders.REPOSITORIES.CATEGORY_REPOSITORY.provide,
-    //     );
-    //   });
-    //   test.each(arrange)('when body is $label', async ({ value }) => {
-    //     const category = Category.fake().aCategory().build();
-    //     await categoryRepo.insert(category);
-    //     return request(appHelper.app.getHttpServer())
-    //       .patch(`/categories/${category.category_id.id}`)
-    //       .send(value.send_data)
-    //       .expect(422)
-    //       .expect(value.expected);
-    //   });
-    // });
 
     describe('should a response error with 422 when throw EntityValidationError', () => {
       const app = startApp();
@@ -113,9 +89,9 @@ describe('CategoriesController (e2e)', () => {
         await categoryRepo.insert(category);
         return request(app.app.getHttpServer())
           .patch(`/categories/${category.category_id.id}`)
+          .authenticate(app.app)
           .send(value.send_data)
           .send(value.expected.statusCode);
-        // .expect(value.expected.message);
       });
     });
 
@@ -137,6 +113,7 @@ describe('CategoriesController (e2e)', () => {
 
           const res = await request(appHelper.app.getHttpServer())
             .patch(`/categories/${categoryCreated.category_id.id}`)
+            .authenticate(appHelper.app)
             .send(send_data)
             .expect(200);
           const keyInResponse = UpdateCategoryFixture.keysInResponse;

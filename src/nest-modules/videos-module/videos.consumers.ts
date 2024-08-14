@@ -18,7 +18,7 @@ export class VideosConsumers {
     queueOptions: {
       deadLetterExchange: 'dlx.exchange',
       deadLetterRoutingKey: 'videos.convert',
-      //messageTtl: 5000 - tempo de vida da mensagem na fila para ser republicada
+      messageTtl: 5000,
     },
   })
   async onProcessVideo(msg: {
@@ -38,7 +38,6 @@ export class VideosConsumers {
       status: msg.video?.status as AudioVideoMediaStatus,
     });
 
-    // try {
     await new ValidationPipe({
       errorHttpStatusCode: 422,
     }).transform(input, {
@@ -49,8 +48,5 @@ export class VideosConsumers {
       ProcessAudioVideoMediasUseCase,
     );
     await useCase.execute(input);
-    // } catch (error) {
-    //   console.log(error);
-    // }
   }
 }

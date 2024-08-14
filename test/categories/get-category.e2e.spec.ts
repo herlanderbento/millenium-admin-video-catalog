@@ -1,12 +1,12 @@
 import request from 'supertest';
-import { startApp } from '../../src/nest-modules/shared-module/testing/helpers';
 import { instanceToPlain } from 'class-transformer';
-import { CategoryOutputMapper } from '../../src/core/category/application/use-cases/common/category-output';
-import { Category } from '../../src/core/category/domain/category.aggregate';
 import { ICategoryRepository } from '../../src/core/category/domain/category.repository';
-import { CategoriesController } from '../../src/nest-modules/categories-module/categories.controller';
-import { GetCategoryFixture } from '../../src/nest-modules/categories-module/testing/category-fixture';
 import * as CategoryProviders from '../../src/nest-modules/categories-module/categories.providers';
+import { CategoryOutputMapper } from '../../src/core/category/application/use-cases/common/category-output';
+import { startApp } from '../../src/nest-modules/shared-module/testing/helpers';
+import { CategoriesController } from '../../src/nest-modules/categories-module/categories.controller';
+import { Category } from '../../src/core/category/domain/category.aggregate';
+import { GetCategoryFixture } from '../../src/nest-modules/categories-module/testing/category-fixture';
 
 describe('CategoriesController (e2e)', () => {
   const nestApp = startApp();
@@ -35,6 +35,7 @@ describe('CategoriesController (e2e)', () => {
       test.each(arrange)('when id is $id', async ({ id, expected }) => {
         return request(nestApp.app.getHttpServer())
           .get(`/categories/${id}`)
+          .authenticate(nestApp.app)
           .expect(expected.statusCode)
           .expect(expected);
       });
@@ -49,6 +50,7 @@ describe('CategoriesController (e2e)', () => {
 
       const res = await request(nestApp.app.getHttpServer())
         .get(`/categories/${category.category_id.id}`)
+        .authenticate(nestApp.app)
         .expect(200);
       const keyInResponse = GetCategoryFixture.keysInResponse;
       expect(Object.keys(res.body)).toStrictEqual(['data']);
