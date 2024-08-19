@@ -1,5 +1,5 @@
 @hostname = localhost
-@port = 3005
+@port = 3000
 @host = {{hostname}}:{{port}}
 @contentType = application/json
 ## valid uuid = 50cf148b-d8c9-48c9-94e3-91551f3ed62b
@@ -172,7 +172,7 @@ Content-Type: application/json
 }
 
 ###
-@jwtToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tY2F0YWxvZyJdfSwiaWF0IjoxNzIzNjMzMjk4LCJleHAiOjE3MjM3MTk2OTh9.lhvzcd8H-jq_aKR7DSx6baHAn4PAzGdGNELzILqk3KoXwreZ9gVc7X0lVufBn27BH_zcuJOfXGbqFdYhwM3MRv_JxJIjlAsV4o0INRkcusAQBHgyu-3_oErhXW99h_RgN5eSzXL7COkTs8EYK-4jCv7f8u0YyBdz_lcdk1pgggfdPzigIRjZ2QrtVaImv9cBtGqbKaWXq4D6UfsfHieIMDHBwY2G4IR_dPzYFEidYbFeYGxg6L91tL_RNXx2--QitNFcNKMAxEl0_TBXmh3k7FK0EoLhx2375FEgpukhHgY1L7tg3lqw_OWM-7X7JTHdczvOcWztok8KBEo6DgiVRQ
+@jwtToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tY2F0YWxvZyJdfSwiaWF0IjoxNzI0MDgxODI2LCJleHAiOjE3MjQxNjgyMjZ9.Uu40tc-pqLt4dDoSx3Da_mIKRmV2khM1UbptaZjjSTpATCgJGc7SSFOE9DQMSEF1CXtO9KounTi_6mJpTlaE2QSZlOmpRoMvfHWsvEaTcQn8ybr0bmG0x_w2bLDd2scn-4EDZwqEPuXIWUeQYF6wLOenv6wnbgCPwpRGvJOQMI2BAtARYZvwL24L7uxqMVjWg5Wgle_KNdIzZj6qHAHhfXdSXzKPRPIuKZ34K3F_g3aczge3gd2pG5dH26CvF10MoKBMzEteDddq-UsZN7XO8-Npi19lIy_5raS0_2N9jJaOsoIXzkrVtzSZvOm1WuQyKaPgmGnLJ0xRC6Y3lpoSLg
 
 
 ###

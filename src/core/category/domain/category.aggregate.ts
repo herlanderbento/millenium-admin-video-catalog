@@ -42,7 +42,6 @@ export class Category extends AggregateRoot {
 
   static create(props: CategoryCreateCommand): Category {
     const category = new Category(props);
-    //category.validate();
     category.validate(['name']);
     return category;
   }

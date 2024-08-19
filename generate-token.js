@@ -1,5 +1,6 @@
-import { config } from 'dotenv';
-import { sign } from 'jsonwebtoken';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { config } = require('dotenv');
+const jwt = require('jsonwebtoken');
 
 //read the .env file from envs folder
 config({
@@ -7,7 +8,7 @@ config({
 });
 
 //create a token
-const token = sign(
+const token = jwt.sign(
   {
     realm_access: {
       roles: ['admin-catalog'],
