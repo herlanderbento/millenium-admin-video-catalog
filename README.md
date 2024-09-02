@@ -1,6 +1,5 @@
 <center>
   <p align="center">
-      <img src="https://user-images.githubusercontent.com/20674439/158480514-a529b310-bc19-46a5-ac95-fddcfa4776ee.png" width="150"/>&nbsp;
     <img src="https://nestjs.com/img/logo-small.svg" alt="Nest Logo" width="150" />
   </p>  
   <h1 align="center">🚀 Video Catalog microservice with NestJS</h1>
