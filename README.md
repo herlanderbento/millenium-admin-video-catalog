@@ -14,7 +14,7 @@
 - Just clone the Repository:
 
 ```sh
-git clone https://github.com/herlanderbento/fc3-admin-video-catalog-typescript.git
+git clone https://github.com/herlanderbento/millenium-admin-video-catalog.git
 ```
 
 - Upload the project containers
