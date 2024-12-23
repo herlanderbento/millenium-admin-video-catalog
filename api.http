@@ -19,6 +19,8 @@ Authorization: Bearer {{jwtToken}}
 ###  List categories
 GET http://{{host}}/categories
 Content-Type: {{contentType}}
+Authorization: Bearer {{jwtToken}}
+
 
 ### Get category
 GET  http://{{host}}/categories/{{categoryId}}
@@ -172,7 +174,7 @@ Content-Type: application/json
 }
 
 ###
-@jwtToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tY2F0YWxvZyJdfSwiaWF0IjoxNzI0MDgxODI2LCJleHAiOjE3MjQxNjgyMjZ9.Uu40tc-pqLt4dDoSx3Da_mIKRmV2khM1UbptaZjjSTpATCgJGc7SSFOE9DQMSEF1CXtO9KounTi_6mJpTlaE2QSZlOmpRoMvfHWsvEaTcQn8ybr0bmG0x_w2bLDd2scn-4EDZwqEPuXIWUeQYF6wLOenv6wnbgCPwpRGvJOQMI2BAtARYZvwL24L7uxqMVjWg5Wgle_KNdIzZj6qHAHhfXdSXzKPRPIuKZ34K3F_g3aczge3gd2pG5dH26CvF10MoKBMzEteDddq-UsZN7XO8-Npi19lIy_5raS0_2N9jJaOsoIXzkrVtzSZvOm1WuQyKaPgmGnLJ0xRC6Y3lpoSLg
+@jwtToken = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsiYWRtaW4tY2F0YWxvZyJdfSwiaWF0IjoxNzMxMDUzODQ1LCJleHAiOjE3MzExNDAyNDV9.ahShChid03g-eMCAS6mL3IWXu9AVAbBSbkf2HFwIQjiLuAUWcyuoot4d6DWnMVbzFYe9Zz17aq08ONU0q0hm5y9Ftv9cYVnochhlpVPm8Q2mCdR-C8ZiKbXrwPbld_FuTR3CSxqfN3UpFVFdPCO8b9Bp5M7qkvYRxTRz7BQ29opq40AfxRLUNe8CGhOWCbfJEtEE1XLSK8eRbLVMt13mwYRuNYqz_QqqCSYQldzptvzvoI2vyakmuByIdsWtgicpPPL9boJTOa70_odY69WZaD03VrAJNAiDE_vja9fzXAsWWsI73NEfWQyJLN77KDHbPWfRsKSBs4fYaZvT6sDoVQ
 
 
 ###

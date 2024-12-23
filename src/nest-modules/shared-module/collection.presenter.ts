@@ -3,7 +3,6 @@ import {
   PaginationPresenter,
   PaginationPresenterProps,
 } from './pagination.presenter';
-import { CategoryPresenter } from '../categories-module/categories.presenter';
 
 export abstract class CollectionPresenter {
   @Exclude()
@@ -18,5 +17,5 @@ export abstract class CollectionPresenter {
     return this.paginationPresenter;
   }
 
-  abstract get data(): CategoryPresenter[];
+  abstract get data(): any[];
 }
