@@ -7,6 +7,7 @@ import { CastMembersModule } from './nest-modules/cast-members-module/cast-membe
 import { GenresModule } from './nest-modules/genres-module/genres.module';
 import { VideosModule } from './nest-modules/videos-module/videos.module';
 import { EventModule } from './nest-modules/event-module/event.module';
+import { EventsModule } from './nest-modules/events-module/events.module';
 import { UseCaseModule } from './nest-modules/use-case-module/use-case.module';
 import { RabbitMQFakeConsumer } from './rabbitmq-fake.consumer';
 import { RabbitmqFakeController } from './rabbitmq-fake/rabbitmq-fake.controller';
@@ -18,6 +19,7 @@ import { AuthModule } from './nest-modules/auth-module/auth.module';
     ConfigModule.forRoot(),
     SharedModule,
     EventModule,
+    EventsModule,
     UseCaseModule,
     DatabaseModule,
     RabbitmqModule.forRoot(),
